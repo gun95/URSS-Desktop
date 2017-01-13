@@ -37,8 +37,7 @@ public class MainController implements Initializable {
             public void handle(javafx.scene.input.MouseEvent event) {
                 System.out.println("feed");
                 try {
-                    main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/main.fxml")));
-
+                    main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/feed.fxml")));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -50,7 +49,6 @@ public class MainController implements Initializable {
                 System.out.println("login");
                 try {
                     main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/login.fxml")));
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -62,7 +60,6 @@ public class MainController implements Initializable {
                 System.out.println("sign in");
                 try {
                     main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/sign_in.fxml")));
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
