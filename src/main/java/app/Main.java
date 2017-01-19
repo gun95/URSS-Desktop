@@ -1,4 +1,4 @@
-/**
+package app; /**
  * Created by gun on 05/01/2017.
  * URSS-Desktop
  */
@@ -13,10 +13,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Layout/main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../Layout/main.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {

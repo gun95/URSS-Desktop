@@ -1,10 +1,10 @@
 package Api;
 
-import Model.Credential;
+import Model.request.loginRequest;
+import Model.response.Credential;
+
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
+import retrofit2.http.*;
 
 /**
  * Created by gun on 13/01/2017.
@@ -13,13 +13,10 @@ import retrofit2.http.POST;
 
 public interface UrssDesktopApi {
 
-    @FormUrlEncoded
-    @POST("/auth/local")
-    Call<Credential> Login(@Field("email") String email,
-                                      @Field("password") String password);
 
-    @FormUrlEncoded
+    @POST("/auth/local")
+    Call<Credential> login(@Body loginRequest body);
+
     @POST("/api/credentials/")
-    Call<Credential> createCredential(@Field("email") String email,
-                                      @Field("password") String password);
+    Call<Credential> createCredential(@Body loginRequest body);
 }
