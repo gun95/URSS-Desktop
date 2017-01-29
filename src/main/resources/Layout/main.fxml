@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
       <VBox prefHeight="720.0" prefWidth="149.0" style="-fx-background-color: D32F2F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="66.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="149.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Drawable/star.png" />
+                  <Image url="@../Drawable/urss_logo2.png" />
                </image>
             </ImageView>
             <JFXButton fx:id="main_button_feed" prefHeight="25.0" prefWidth="146.0" text="Consulter un feed" textFill="#ffc107" />

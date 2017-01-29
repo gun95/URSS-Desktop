@@ -1,8 +1,9 @@
 package Controller;
 
 import Api.ApiManager;
-import Model.request.loginRequest;
-import Model.response.Credential;
+import Model.request.RequestLogin;
+import Model.response.User;
+import Module.DatabaseHandler;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jfoenix.controls.JFXButton;
@@ -58,13 +59,16 @@ public class LoginController implements Initializable {
 
     }
 
-
-    private void login(String email, String password) {
-        ApiManager.get().login(new loginRequest(email, password)).enqueue(new Callback<Credential>() {
-            public void onResponse(Call<Credential> call, Response<Credential> response) {
+    public void login(final String email, final String password) {
+        ApiManager.get().login(new RequestLogin(email, password)).enqueue(new Callback<User>() {
+            public void onResponse(Call<User> call, Response<User> response) {
                 System.out.println("response = " + response.raw().toString());
                 if (response.isSuccessful()) {
                     System.out.println("login = " + response.body().toString());
+                    User user = new User();
+                    user.setEmail(email);
+                    user.setPassword(password);
+                    DatabaseHandler.getInstance().addUser(user);
                     updateUi();
                 } else {
                     try {
@@ -79,7 +83,7 @@ public class LoginController implements Initializable {
                     }
                 }
             }
-            public void onFailure(Call<Credential> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 System.out.println("On failure login : " + t.getMessage());
                 updateUiError("On failure login : " + t.getMessage());
             }
@@ -102,6 +106,8 @@ public class LoginController implements Initializable {
                 try {
                     main_pane = MainController.getmMainPane();
                     main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/feed.fxml")));
+
+                    MainController.hideButton();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

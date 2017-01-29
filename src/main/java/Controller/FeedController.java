@@ -3,6 +3,7 @@ package Controller;
 import Api.ApiManager;
 import Model.response.Article;
 import Model.response.Feed;
+import Model.response.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jfoenix.controls.JFXButton;
@@ -28,7 +29,13 @@ import retrofit2.Response;
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by gun on 06/01/2017.
@@ -99,15 +106,24 @@ public class FeedController implements Initializable {
                 if (response.isSuccessful()) {
                     feed.setFeedId(response.body().getFeedId());
                     System.out.println("postFeed = " + feed.toString());
+                    boolean find = false;
+                    for (int i = 0; i < MainController.getmHistory().getBookmarks().size(); i++) {
+                        if (feed.getFeedId().equals(MainController.getmHistory().getBookmarks().get(i))) {
+                            find = true;
+                            System.out.println("feed find");
+                            break;
+                        }
+                    }
+                    if (!find)
+                        putBookmarks();
                     getFeed();
-
                 } else {
                     try {
                         JsonObject jObjError = new JsonObject();
                         final Gson gson = new Gson();
                         jObjError = gson.fromJson(response.errorBody().string(), JsonObject.class);
                         System.out.println("not sucess postFeed = " + response.code() + " message = " + jObjError.get("message"));
-                        updateUiError( jObjError.get("message").toString());
+                        updateUiError(jObjError.get("message").toString());
                     } catch (Exception e) {
                         System.out.println("error string errorBody");
                         updateUiError("error string errorBody");
@@ -127,11 +143,45 @@ public class FeedController implements Initializable {
             public void onResponse(Call<Feed> call, Response<Feed> response) {
                 System.out.println("response = " + response.raw().toString());
                 if (response.isSuccessful()) {
-                    feed.setArticleIdArrayList(response.body().getArticleIdArrayList());
-                    System.out.println("size = " + feed.getArticleIdArrayList().size());
+
+                    Feed tmp = new Feed();
+                    tmp.setArticleIdArrayList(response.body().getArticleIdArrayList());
+                    int y = 0;
+                    boolean find = false;
+                    for (int i = 0; i < tmp.getArticleIdArrayList().size(); i++)
+                    {
+                        for (y = 0; y < feed.getArticleIdArrayList().size(); y++) {
+                            if (tmp.getArticleIdArrayList().get(i).equals(feed.getArticleIdArrayList().get(y))) {
+                                System.out.println("finfffff");
+                                find = true;
+                            }
+                        }
+                        y = 0;
+                        if (!find)
+                        {
+                            System.out.println("addddd");
+                            feed.getArticleIdArrayList().add(tmp.getArticleIdArrayList().get(i));
+                            find = false;
+                        }
+
+                    }
                     for (int i = 0; i < feed.getArticleIdArrayList().size(); i++) {
                         getArticle(feed.getArticleIdArrayList().get(i));
                     }
+
+                    final ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+
+                    service.schedule(() -> {
+                        System.out.println("remove");
+                        feed.getArticleArrayList().sort(Comparator.comparing(Article::getPubDate));
+                        Platform.runLater(() -> {
+                            feed_jfxlistview.getItems().clear();
+                            for (int i = 0; i < feed.getArticleArrayList().size(); i++) {
+                                updateUi(feed.getArticleArrayList().get(i));
+                            }
+                        });
+                    }, 2, TimeUnit.SECONDS);
+
 
                 } else {
                     try {
@@ -151,13 +201,50 @@ public class FeedController implements Initializable {
         });
     }
 
+    private void putBookmarks() {
+        User user = MainController.getmUser();
+        ApiManager.get().putBookmarks("Bearer " + user.getToken(), feed.getFeedId()).enqueue(new Callback<String>() {
+            public void onResponse(Call<String> call, Response<String> response) {
+                System.out.println("response = " + response.raw().toString());
+                if (response.isSuccessful()) {
+                    System.out.println("put bookmars ok");
+                } else {
+                    try {
+                        JsonObject jObjError = new JsonObject();
+                        final Gson gson = new Gson();
+                        jObjError = gson.fromJson(response.errorBody().string(), JsonObject.class);
+                        System.out.println("not sucess putBookmarks = " + response.code() + " message = " + jObjError.get("message"));
+                    } catch (Exception e) {
+                        System.out.println("error string errorBody");
+                    }
+                }
+            }
+
+            public void onFailure(Call<String> call, Throwable t) {
+                System.out.println("On failure putBookmarks : " + t.getMessage());
+            }
+        });
+    }
+
+
     private void getArticle(String articleId) {
         ApiManager.get().getArticle(articleId).enqueue(new Callback<Article>() {
             public void onResponse(Call<Article> call, Response<Article> response) {
                 System.out.println("response = " + response.raw().toString());
                 if (response.isSuccessful()) {
                     System.out.println(response.body().getTitle());
-                    feed.addArticleArrayList(response.body());
+
+                    Boolean find = false;
+                    for (int i = 0 ; i < feed.getArticleArrayList().size() ; i ++)
+                    {
+                        if (feed.getArticleArrayList().get(i).getId().equals(response.body().getId())){
+                            find = true;
+                        }
+                    }
+                    if (!find)
+                    {
+                        feed.addArticleArrayList(response.body());
+                    }
                     updateUi(response.body());
                 } else {
                     try {

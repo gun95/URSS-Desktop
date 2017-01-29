@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName;
  * URSS-Desktop
  */
 public class Article {
+    @SerializedName("_id")
+    private String id;
     @SerializedName("feedId")
     private String feedId;
     @SerializedName("title")
@@ -27,6 +29,14 @@ public class Article {
     private String enclosureLength;
     @SerializedName("enclosureType")
     private String enclosureType;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getFeedId() {
         return feedId;

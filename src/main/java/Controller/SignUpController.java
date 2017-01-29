@@ -1,8 +1,8 @@
 package Controller;
 
 import Api.ApiManager;
-import Model.request.loginRequest;
-import Model.response.Credential;
+import Model.request.RequestLogin;
+import Model.response.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jfoenix.controls.JFXButton;
@@ -64,8 +64,8 @@ public class SignUpController implements Initializable {
     }
 
     private void signIn(String email, String password) {
-        ApiManager.get().createCredential(new loginRequest(email, password)).enqueue(new Callback<Credential>() {
-            public void onResponse(Call<Credential> call, Response<Credential> response) {
+        ApiManager.get().createCredential(new RequestLogin(email, password)).enqueue(new Callback<User>() {
+            public void onResponse(Call<User> call, Response<User> response) {
                 System.out.println("response = " + response.raw().toString());
                 if (response.isSuccessful()) {
                     // normal que il y a que null pour le moment le serveur renvoi "id" au lieu de "userId" attendre que shadow change ca
@@ -85,13 +85,12 @@ public class SignUpController implements Initializable {
                 }
             }
 
-            public void onFailure(Call<Credential> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 System.out.println("On failure create credential : " + t.getMessage());
                 updateUiError("On failure create credential : " + t.getMessage());
             }
         });
     }
-
 
     private void updateUiError(final String error) {
         Platform.runLater(new Runnable() {
@@ -107,7 +106,7 @@ public class SignUpController implements Initializable {
                 try {
                     Pane main_pane;
                     main_pane = MainController.getmMainPane();
-                    main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/feed.fxml")));
+                    main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/login.fxml")));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
