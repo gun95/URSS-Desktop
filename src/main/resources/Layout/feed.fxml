@@ -22,6 +22,11 @@
                                 <Font name="System Bold" size="36.0" />
                             </font>
                         </Text>
+                        <JFXButton fx:id="feed_button_deco" alignment="CENTER" prefHeight="49.0" prefWidth="52.0" text="Deconection" textFill="#ffc107">
+                            <HBox.margin>
+                                <Insets top="15.0" />
+                            </HBox.margin>
+                        </JFXButton>
                         <Pane HBox.hgrow="ALWAYS" />
                   <Text fill="#ffc107" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="feed_text_error">
                      <HBox.margin>

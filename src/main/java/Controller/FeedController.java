@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import retrofit2.Call;
@@ -54,6 +55,8 @@ public class FeedController implements Initializable {
     Text feed_text_error;
     @FXML
     private Hyperlink hyperlink;
+    @FXML
+    private JFXButton feed_button_deco;
 
     private HostServices hostServices;
 
@@ -70,18 +73,22 @@ public class FeedController implements Initializable {
         hostServices.showDocument(hyperlink.getText());
     }
 
+    @FXML
+    private Pane main_pane;
 
     public void initialize(URL location, ResourceBundle resources) {
 
-        /*for (int i = 0; i < 10; i++) {
-            HBox hBox = new HBox();
-            try {
-                hBox.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/list_feed.fxml")));
-                feed_jfxlistview.getItems().add(hBox);
-            } catch (IOException e) {
-                e.printStackTrace();
+        main_pane = MainController.getmMainPane();
+        feed_button_deco.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
+            public void handle(javafx.scene.input.MouseEvent event) {
+                System.out.println("feed");
+                try {
+                    main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/login.fxml")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }*/
+        });
 
         feed = new Feed();
         feed_button_valider.setOnMouseClicked(new EventHandler<MouseEvent>() {
