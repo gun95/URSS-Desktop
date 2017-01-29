@@ -4,22 +4,22 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
-      <VBox maxHeight="720.0" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="149.0" style="-fx-background-color: D32F2F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="720.0" prefWidth="149.0" style="-fx-background-color: D32F2F;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="66.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Drawable/star.png" />
-               </image></ImageView>
-            <JFXButton fx:id="main_button_feed" prefHeight="25.0" prefWidth="146.0" text="Consulter un feed" />
-            <JFXButton fx:id="main_button_login" prefHeight="25.0" prefWidth="146.0" text="Connection" />
-            <JFXButton fx:id="main_button_sign_in" prefHeight="25.0" prefWidth="146.0" text="Inscription" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="main_button_feed" prefHeight="25.0" prefWidth="146.0" text="Consulter un feed" textFill="#ffc107" />
+            <JFXButton fx:id="main_button_login" prefHeight="25.0" prefWidth="146.0" text="Connection" textFill="#ffc107" />
+            <JFXButton fx:id="main_button_sign_in" prefHeight="25.0" prefWidth="146.0" text="Inscription" textFill="#ffc107" />
          </children>
       </VBox>
-      <Pane layoutX="149.0" prefHeight="720.0" prefWidth="1133.0" fx:id="main_pane"/>
+      <AnchorPane fx:id="main_pane" layoutX="155.0" layoutY="14.0" prefHeight="720.0" prefWidth="1121.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="149.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

@@ -1,11 +1,11 @@
 package Controller;
 
+import javafx.application.HostServices;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -26,6 +26,18 @@ public class MainController implements Initializable {
     @FXML
     private Pane main_pane;
 
+    private static HostServices hostServices ;
+
+    public static HostServices getHostServices() {
+        return hostServices ;
+    }
+
+    public  void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices ;
+    }
+
+
+
     @FXML
     private static Pane mMainPane;
 
@@ -34,11 +46,14 @@ public class MainController implements Initializable {
     }
 
 
-
     public void initialize(URL location, ResourceBundle resources) {
 
         mMainPane = main_pane;
-
+        try {
+            main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/feed.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         main_button_feed.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
             public void handle(javafx.scene.input.MouseEvent event) {
                 System.out.println("feed");
@@ -65,7 +80,7 @@ public class MainController implements Initializable {
             public void handle(javafx.scene.input.MouseEvent event) {
                 System.out.println("sign in");
                 try {
-                    main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/sign_in.fxml")));
+                    main_pane.getChildren().setAll((Pane) FXMLLoader.load(getClass().getResource("../Layout/sign_up.fxml")));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

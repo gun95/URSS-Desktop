@@ -2,4 +2,5 @@
 <resources>
     <item name="red" type="color">#D32F2F</item>
     <item name="jaune" type="color">#FFC107</item>
+    <item name="gris" type="color">#73879C</item>
 </resources>

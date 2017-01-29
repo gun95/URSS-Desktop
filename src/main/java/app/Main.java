@@ -3,6 +3,7 @@ package app; /**
  * URSS-Desktop
  */
 
+import Controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,11 +14,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../Layout/main.fxml"));
-        primaryStage.setTitle("Hello World");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Layout/main.fxml"));
+        Parent root = loader.load();
+        primaryStage.setTitle("Urss");
+        MainController controller = loader.getController();
+        controller.setHostServices(getHostServices());
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {

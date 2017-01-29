@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignUpController">
+    <children>
+        <VBox style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox prefHeight="34.0" prefWidth="594.0" style="-fx-background-color: #D32F2F;">
+                    <children>
+                        <Text fill="#ffc107" strokeType="OUTSIDE" strokeWidth="0.0" text="Inscription">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <VBox prefHeight="87.0" prefWidth="1280.0" style="-fx-background-color: 000000;">
+                    <children>
+
+                        <HBox>
+                            <children>
+                                <JFXTextField fx:id="sign_up_textfield_email" focusColor="#FFC107" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" promptText="Email" style="-fx-text-inner-color: #FFC107;" unFocusColor="#D32F2F" />
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="237.13671875" fx:id="sign_up_text_error">
+                                    <HBox.margin>
+                                        <Insets left="24.0" top="8.0" />
+                                    </HBox.margin>
+                                </Text>
+                            </children>
+                        </HBox>
+
+                        <JFXPasswordField fx:id="sign_up_jfxpasswordfield_password" focusColor="#FFC107" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" promptText="Password" unFocusColor="#D32F2F">
+                            <VBox.margin>
+                                <Insets top="24.0" />
+                            </VBox.margin>
+                        </JFXPasswordField>
+                        <JFXPasswordField fx:id="sign_up_jfxpasswordfield_confirm_password" focusColor="#FFC107" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" promptText="Password" unFocusColor="#D32F2F">
+                            <VBox.margin>
+                                <Insets top="24.0" />
+                            </VBox.margin>
+                        </JFXPasswordField>
+                        <JFXButton fx:id="sign_up_button" prefHeight="25.0" prefWidth="80.0" ripplerFill="FFC107" style="-fx-background-color: #D32F2F;" text="Inscription" textFill="#ffc107">
+                            <VBox.margin>
+                                <Insets left="95.0" top="24.0" />
+                            </VBox.margin>
+                        </JFXButton>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="24.0" />
+                    </VBox.margin>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
